@@ -18,7 +18,7 @@ var app = express();
 app.use(session({
   secret: 'everydaybro',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 // mongoose
