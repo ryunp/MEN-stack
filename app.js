@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var localStrategy = require('passport-local');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
