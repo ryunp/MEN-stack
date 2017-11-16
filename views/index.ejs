@@ -3,9 +3,15 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   </head>
   <body>
+    <%- include('partials/header') %>
+
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <% if (locals.user) { %>
+      <p>Hey there, <%= user.username %>! [<a href="/logout">Logout</a>]</p>
+    <% } %>
   </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
+    <%- include('partials/header') %>
+
+    <h1><%= title %></h1>
+
+    <form class="user-info" action="/register" method="POST">
+      <fieldset>
+      <!-- <legend>Info please:</legend> -->
+        <input name="username" type="text" placeholder="Username...">
+        <input name="password" type="password" placeholder="Password...">
+        <br>
+        <input name="firstName" type="text" placeholder="First name...">
+        <input name="lastName" type="text" placeholder="Last name...">
+        <br>
+        <input name="email" type="text" placeholder="Email...">
+        <input name="age" type="text" placeholder="Age...">
+        <br>
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+
+    <% if (locals.error) { %>
+      <h4><span class="error"><%= error.message %></span></h4>
+    <% } %>
+
+    <p><a href="/login">Login</a></p>
+
+  </body>
+</html>

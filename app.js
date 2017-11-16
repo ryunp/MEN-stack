@@ -5,24 +5,35 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var helmet = require('helmet');
+
 var mongoose = require('mongoose');
 var passport = require('passport');
 var localStrategy = require('passport-local');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var index = require('./routes');
+var user = require('./routes/user');
+
 
 var app = express();
 
-// sessions
+
+// HTTP header security
+app.use(helmet());
+
+// cookie sessions
 app.use(session({
-  secret: 'everydaybro',
+  secret: 'every-day',
   resave: false,
   saveUninitialized: false
 }));
 
 // mongoose
 mongoose.connect('mongodb://localhost/middleware');
+
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // passport user auth
 var User = require('./models/user');
@@ -42,8 +53,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// routes
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,7 +66,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
+// general error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
